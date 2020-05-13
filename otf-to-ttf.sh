@@ -1,4 +1,4 @@
 Open($1);
 CIDFlatten();
-Generate($1:r+".ttf");
+Generate("build/" + $1:t:r + ".ttf");
 Quit(0);

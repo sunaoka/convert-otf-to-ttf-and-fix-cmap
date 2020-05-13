@@ -2,11 +2,11 @@ require 'nokogiri'
 
 original_file = ARGV[0]
 basename = File.basename(original_file, '.otf')
-ttf_file = basename + '.ttf'
-original_ttx = basename + "-otf.ttx"
-ttf_ttx = basename + "-ttf.ttx"
-modified_ttx = basename + "-ttf-modified.ttx"
-modified_file = "cmap_modified/" + ttf_file
+ttf_file = 'build/' + basename + '.ttf'
+original_ttx = 'build/' + basename + "-otf.ttx"
+ttf_ttx = 'build/' + basename + "-ttf.ttx"
+modified_ttx = 'build/' + basename + "-ttf-modified.ttx"
+modified_file = "cmap_modified/" + basename + '.ttf'
 
 system "ttx -t cmap -o #{original_ttx} #{original_file} "
 system "ttx -t cmap -o #{ttf_ttx} #{ttf_file} "
@@ -24,7 +24,7 @@ cmaps.each do
   dup_table = {}
   cmap.xpath('map').each do
     |map|
-    if dup_table[map['name']] 
+    if dup_table[map['name']]
       dup_table[map['name']] << map['code']
     elsif rev_table[map['name']]
       dup_table[map['name']] = [ rev_table[map['name']], map['code']]
